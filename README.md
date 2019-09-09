@@ -1,43 +1,9 @@
 ## Disease Stage Classification Projects:
 Advanced machine learning projects in the medical domian
 
-### Age prediction based on brain MRI data 
-Age regression from original brain MRI features. The following workflow is applied:
+### I - Heart rhythm classification from electrocardiogram
+The classification of entire time series into one of 4 classes from the original ECG recordings of different length sampled as 300Hz to predict heart rhythm.
 
-1- Imputation: Handling missing by imputing median value of given feature
-
-2- Outlier detection: IQR method was used for outlier detection. It is a robust measure of dispersion method for labeling outliers
-
-3- Data Standardization: Since Ridge regression is planned to be used, scaling is important. Typically this is done by removing the mean and scaling to unit variance. However, outliers can often influence the sample mean / variance in a negative way. In such cases, the median and the interquartile range often give better results
-
-4- Feature selection: 
-Since the data is in high dimension especially compared to the data rows, then a feature selection method is required to select the most important features, thus avoiding overfitting and also slow computing. Univariate feature selection from Sklearn was used
-
-5- Model selection: 
-Ridge regression is used. The ridge coefficients minimize a penalized residual sum of squares, lambda is a complexity parameter that controls the amount of shrinkage: the larger the value of, the greater the amount of shrinkage and thus the coefficients become more robust to collinearity.
-
-
-### Disease classification from medical image
-The following workflow have been applied in python and using Scikit Learn library:
-
-1-	Classification model selection: 
-Multiclass SVM, type C-Support Vector Classification (C-SVM) is selected with Radial Basis Function (RBF) kernel. RBF: exp(-gamma |x-x'|^2).
-
-2-	Dealing with the imbalanced data: 
-The chosen solution is to adjust class weights to be inversely proportional to class frequencies. In Sklearn library ‘balanced’ mode is selected which automatically calculates the weights adjustment
-
-3-	Features Standardization (No feature selection): 
-Since SVM RBF kernel is used, its essential to standardize (mean=0, Std=1). Thus, avoid the domination of large values (variance) on the objective function.
-
-4-	Hyper parameters selection: 
-Two paramters must be considered: (K) best features, (C) Penalty parameter, and (gamma) parameter which defines how much influence a single training example has.
-
-C= 1 and gamma= 0.001 were selected. These values are optimal intermediate values, thus avoiding overfitting with high C or gamma and avoid underfitting with low C or gamma.
-The Kfold (5) scores = [0.70324074, 0.70324074, 0.68287037, 0.68981481, 0.6662037]
-Resulting to a mean score of 0.689 and variance (+/-0.028)
-
-
-### Heart rhythm classification from electrocardiogram
 The following workflow is applied using python with Biosppy and Scikit Learn libraries:
 
 #### Feature extraction:
@@ -65,7 +31,47 @@ For each signal in the data set Feature extraction is done in the following sequ
 10-	F1 Score = 0.745, Variance= +/-0.013 (that’s +/- 2sd). For parameters: {'C': 5, 'gamma': 0.02}
 
 
-### Heart diseases diagnosis from echocardiography
+### II - Disease classification from medical image
+This task is primarily concerned with multi-class classification of 3 classes of diseases based on medical image features. The dataset has high class imbalance.
+
+The following workflow have been applied in python and using Scikit Learn library:
+
+1-	Classification model selection: 
+Multiclass SVM, type C-Support Vector Classification (C-SVM) is selected with Radial Basis Function (RBF) kernel. RBF: exp(-gamma |x-x'|^2).
+
+2-	Dealing with the imbalanced data: 
+The chosen solution is to adjust class weights to be inversely proportional to class frequencies. In Sklearn library ‘balanced’ mode is selected which automatically calculates the weights adjustment
+
+3-	Features Standardization (No feature selection): 
+Since SVM RBF kernel is used, its essential to standardize (mean=0, Std=1). Thus, avoid the domination of large values (variance) on the objective function.
+
+4-	Hyper parameters selection: 
+Two paramters must be considered: (K) best features, (C) Penalty parameter, and (gamma) parameter which defines how much influence a single training example has.
+
+C= 1 and gamma= 0.001 were selected. These values are optimal intermediate values, thus avoiding overfitting with high C or gamma and avoid underfitting with low C or gamma.
+The Kfold (5) scores = [0.70324074, 0.70324074, 0.68287037, 0.68981481, 0.6662037]
+Resulting to a mean score of 0.689 and variance (+/-0.028)
+
+
+### III - Age prediction based on brain MRI data 
+Age regression from original brain MRI features. The dataset requires preprocessing. The following workflow is applied:
+
+1- Imputation: Handling missing by imputing median value of given feature
+
+2- Outlier detection: IQR method was used for outlier detection. It is a robust measure of dispersion method for labeling outliers
+
+3- Data Standardization: Since Ridge regression is planned to be used, scaling is important. Typically this is done by removing the mean and scaling to unit variance. However, outliers can often influence the sample mean / variance in a negative way. In such cases, the median and the interquartile range often give better results
+
+4- Feature selection: 
+Since the data is in high dimension especially compared to the data rows, then a feature selection method is required to select the most important features, thus avoiding overfitting and also slow computing. Univariate feature selection from Sklearn was used
+
+5- Model selection: 
+Ridge regression is used. The ridge coefficients minimize a penalized residual sum of squares, lambda is a complexity parameter that controls the amount of shrinkage: the larger the value of, the greater the amount of shrinkage and thus the coefficients become more robust to collinearity.
+
+
+### IV - Heart diseases diagnosis from echocardiography
+The objective is to perform the differential diagnosis of the Acute Coronary Syndrome (ACS) and the Takostubo Syndrome (TTS) for the diagnostic of heart diseases through the calssification of a echocardiography video recordings, which is very noisy but inexpensive and vastly available tool. The task is highly challenging for the high dimensionality of the data, low number of samples and high noise level.
+
 
 ####  1st solution:
 1-For each frame I counted the number of Blood pixels (<10) and muscle pixels (>100) within the heart main chamber (Left ventricle) using a window range of rows 20-60 rows and columns 40-80
