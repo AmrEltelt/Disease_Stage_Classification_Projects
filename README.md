@@ -2,9 +2,7 @@
 Advanced machine learning projects in the medical domian
 
 ### I - Heart rhythm classification from electrocardiogram
-The classification of entire time series into one of 4 classes from the original ECG recordings of different length sampled as 300Hz to predict heart rhythm.
-
-The following workflow is applied using python with Biosppy and Scikit Learn libraries:
+The classification of entire time series into one of 4 classes from the original ECG recordings of different length sampled as 300Hz to predict heart rhythm. The following workflow is applied using python with Biosppy and Scikit Learn libraries:
 
 #### Feature extraction:
 For each signal in the data set Feature extraction is done in the following sequence:
@@ -32,9 +30,7 @@ For each signal in the data set Feature extraction is done in the following sequ
 
 
 ### II - Disease classification from medical image
-This task is primarily concerned with multi-class classification of 3 classes of diseases based on medical image features. The dataset has high class imbalance.
-
-The following workflow have been applied in python and using Scikit Learn library:
+This task is primarily concerned with multi-class classification of 3 classes of diseases based on medical image features. The dataset has high class imbalance. The following workflow have been applied in python and using Scikit Learn library:
 
 1-	Classification model selection: 
 Multiclass SVM, type C-Support Vector Classification (C-SVM) is selected with Radial Basis Function (RBF) kernel. RBF: exp(-gamma |x-x'|^2).
