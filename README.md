@@ -4,20 +4,13 @@ Advanced machine learning projects in the medical domian
 ### Age prediction based on brain MRI data 
 Age regression from original brain MRI features. The following workflow is applied:
 
-#### Data Preprocessing 
-##### Imputation: 
-Handling missing by imputing median value of given feature
-##### Outlier detection:
-IQR method was used for outlier detection. It is a robust measure of dispersion method for labeling outliers. The interquartile range is the range between the first and the third quartiles (the edges of the box). Data points that fall outside of either 1.5 times the IQR below the first – or 1.5 times the IQR above the third – quartile are considered to be “outside” or “far out”. 
-##### Data Standardization
-Since Ridge regression is planned to be used, scaling is important. Typically this is done by removing the mean and scaling to unit variance. However, outliers can often influence the sample mean / variance in a negative way. In such cases, the median and the interquartile range often give better results.
-
-#### Feature selection
+1- Imputation: Handling missing by imputing median value of given feature
+2- Outlier detection: IQR method was used for outlier detection. It is a robust measure of dispersion method for labeling outliers.
+3- Data Standardization: Since Ridge regression is planned to be used, scaling is important. Typically this is done by removing the mean and scaling to unit variance. However, outliers can often influence the sample mean / variance in a negative way. In such cases, the median and the interquartile range often give better results.
+4- Feature selection
 Since the data is in high dimension especially compared to the data rows, then a feature selection method is required to select the most important features, thus avoiding overfitting and also slow computing. Univariate feature selection from Sklearn was used
-
-#### Model selection
+5- Model selection
 Ridge regression is used. The ridge coefficients minimize a penalized residual sum of squares, lambda is a complexity parameter that controls the amount of shrinkage: the larger the value of, the greater the amount of shrinkage and thus the coefficients become more robust to collinearity.
-
 
 
 ### Disease classification from medical image
@@ -49,20 +42,7 @@ For each signal in the data set Feature extraction is done in the following sequ
 2-	Scale the signal
 3-	Use the Biosppy library ECG function to generate templates (Beats), which is the waveform around each R peak with a time window from 0.2s before the peak till 0.4s after the peak
 4-	Do segmentation of the mean Beat and extract features out of the wave form, as follows:
-1)	R Mean
-2)	R Std.
-3)	RR Interval Mean
-4)	RR Interval Std.
-5)	Q Mean, 
-6)	Q Std.
-7)	S Mean
-8)	S Std.
-9)	QRS Interval Mean
-10)	T Mean, 
-11)	T Std.
-12)	RT Interval Mean
-13)	Heart Rate Mean
-14)	Heart Rate Std.
+1)	R Mean, 2)	R Std., 3)	RR Interval Mean, 4)	RR Interval Std., 5)	Q Mean, 6)	Q Std., 7)	S Mean, 8)	S Std., 9)	QRS Interval Mean, 10)	T Mean, 11)	T Std., 12)	RT Interval Mean, 13)	Heart Rate Mean, 14)	Heart Rate Std.
 
 5-	Take a sample every 6th data point of Beat (every 0.02 sec) and get Mean and Std. which adds 2x180/6 = 60 additional features
 
